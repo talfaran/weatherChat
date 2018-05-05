@@ -8,5 +8,20 @@
     "start": "node server.js"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/talfaran/weatherChat.git"
+  },
+  "bugs": {
+    "url": "https://github.com/talfaran/weatherChat/issues"
+  },
+  "homepage": "https://github.com/talfaran/weatherChat#readme",
+  "dependencies": {
+    "bootstrap": "^4.1.1",
+    "express": "^4.16.3",
+    "font-awesome": "^4.7.0",
+    "handlebars": "^4.0.11",
+    "jquery": "^3.3.1"
+  }
 }

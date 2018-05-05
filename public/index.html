@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap.min.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-md-6 offset-md-3 border">
+            <h1 class="text-center">
+                Weather Chat For The Masses!
+            </h1>
+            <button class="btn clear-posts">remove posts</button>
+
+            <div class="input-group input-group-lg">
+                <input type="text" class="form-control city-to-search" placeholder="City name" aria-describedby="sizing-addon1">
+                <span class="input-group-prepend search-button" id="sizing-addon1">
+                    <button class="btn">GET WEATHER</button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="weather-posts">
+
+
+
+
+    </div>
+
+    <script id="weatherpost-template" type="text/x-handlebars-template">
+        <div class="row">
+            <div class="col-md-6 offset-md-3 border">
+               <div class="waether-post" data-id=" {{postId}}">
+                    <p>{{name}}, in {{country}}</p>
+                    <p>the temperature is: {{temperature}}</p> 
+                    <ul class="weatherComments">
+                            {{#each comments}}
+                            <li>{{commentText}}</li>
+                            {{/each}}
+                        </ul>
+                        <div class="input-group input-group-md">
+                                <input type="text" class="form-control comment-input" placeholder="comment" aria-describedby="sizing-addon1">
+                            <span class="input-group-prepend comment-button" id="sizing-addon1">
+                                <button class="btn">Comment on weather</button>
+                            </span>
+                        </div>
+                    <!-- <input type="text" class="comment-input"><button class="btn btn-info btn-md comment-button" type = "button" >post comment</button> -->
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/javascript" src="jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="handlebars/dist/handlebars.min.js"></script>
+    <script type="module" src="main.js"></script>
+
+</body>
+
+</html>
