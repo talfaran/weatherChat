@@ -1,36 +1,48 @@
-
-// eather class
 import { weatherPost } from './weatherdata.js';
-import {weatherhtml} from './weatherhtml.js';
-import {weatherApi} from './weatherapi.js';
+import { weatherhtml } from './weatherhtml.js';
+import { weatherApi } from './weatherapi.js';
 
-var weatherData = new weatherPost();
-var weatherHtml = new weatherhtml();
-var findWeather = new weatherApi();
+class weatherController {
 
- weatherData.weatherPosts();
-weatherHtml.renderWeatherPost( weatherData.weatherPosts());
+    constructor() {
+        this.watherData = new weatherPost();
+        this.weatherHtml = new weatherhtml();
+        this.weatherApi = new weatherApi();
+    }
 
-$('.search-button').click(function () {
-    var cityName = weatherHtml.findCityInDom();
-    findWeather.findTemp(cityName).then(function (data) {
-       weatherData.addWeatherPost(data);
-        weatherHtml.renderWeatherPost(weatherData.weatherPostArrey);
-    })
-        .catch(function (jqXHR, textStatus, errorThrown) {
-            console.log(textStatus);
+    startWeatherChat() {
+        this.Html.renderWeatherPost(this.Data.weatherPostArrey)
+
+        $('.search-button').click(()  => {
+            let cityName = this.weatherHtml.findCityInDom();
+            this.weatherApi.findTemp(cityName).then( (data) => {
+                this.weatherData.addWeatherPost(data);
+                this.weatherHtml.renderWeatherPost(this.weatherData.weatherPostArrey);
+            })
+                .catch(function (jqXHR, textStatus, errorThrown) {
+                    console.log(textStatus);
+                })
+        });
+
+        $('.clear-posts').click( () => {
+            localStorage.removeItem(this.weatherData.STORAGE_ID)
+            this.weatherHtml.renderWeatherPost(this.weatherData.weatherPostArrey)
         })
-});
 
-$('.clear-posts').click(function(){
-    localStorage.clear();
-    weatherHtml.renderWeatherPost(weatherData.weatherPosts());
-})
-$('.weather-posts').on('click', '.comment-button', function () {
-   var commentData =  weatherHtml.getCommentFromDom(this);
- let weatherPostData = weatherData.addWeatherComment(commentData);
- weatherHtml.renderWeatherPost(weatherPostData);
-})
+        $('.weather-posts').on('click', '.comment-button',  () => {
+            let commentData = this.weatherHtml.getCommentFromDom(this);
+            this.weatherData.addWeatherComment(commentData);
+            this.weatherHtml.renderWeatherPost(this.weatherData.weatherPostArrey);
+        })
+
+    }
+}
+
+var weatherChat = new weatherController();
+weatherChat.startWeatherChat();
+
+
+
 
 
 

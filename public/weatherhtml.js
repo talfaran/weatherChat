@@ -1,7 +1,6 @@
 class weatherhtml {
 
     renderWeatherPost(weatherPostData) {
-        debugger;
         $('.weather-posts').empty();
         var source = $('#weatherpost-template').html();
         var template = Handlebars.compile(source);

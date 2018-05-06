@@ -1,17 +1,12 @@
 
 class weatherPost {
-
     constructor() {
-        debugger;
-        this.weatherPostArrey;
+
         this.countId = 0;
         this.STORAGE_ID = 'weatherChat';
+        this.weatherPostArrey = this.getFromLocalStorage();
     }
 
-    weatherPosts(){
-        this.weatherPostArrey = this.getFromLocalStorage();
-        return this.weatherPostArrey;
-    }
     addWeatherPost(data) {
         var currentTemp = data.current.temp_c;
         var cityName = data.location.name;
@@ -24,35 +19,34 @@ class weatherPost {
             postId: this.countId,
             comments: []
         };
+
         this.weatherPostArrey.push(cityInfo);
         this.saveToLocalStorage()
         this.weatherPostArrey = this.getFromLocalStorage();
         this.countId++;
-        return this.weatherPostArrey;
     };
 
-    saveToLocalStorage(){
+    saveToLocalStorage() {
         localStorage.setItem(this.STORAGE_ID, JSON.stringify(this.weatherPostArrey));
-      }
+    }
 
-  getFromLocalStorage() {
+    getFromLocalStorage() {
         return JSON.parse(localStorage.getItem(this.STORAGE_ID) || '[]');
-  }
+    }
     addWeatherComment(commentData) {
         var comment = {
             commentText: commentData.commentText
-    }
+        }
         var id = commentData.id
-        for (var i = 0; i < this.weatherPostArrey.length; i ++) {
+        for (var i = 0; i < this.weatherPostArrey.length; i++) {
             if (id == this.weatherPostArrey[i].postId) {
                 this.weatherPostArrey[i].comments.push(comment)
             }
         }
         this.saveToLocalStorage()
         this.weatherPostArrey = this.getFromLocalStorage();
-        return this.weatherPostArrey;
     }
 
-}// end of weather class
+}  // end of weather class
 
-export{weatherPost}
+export { weatherPost }
