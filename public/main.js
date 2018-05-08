@@ -5,31 +5,33 @@ import { weatherApi } from './weatherapi.js';
 class weatherController {
 
     constructor() {
-        this.watherData = new weatherPost();
+        this.weatherData = new weatherPost();
         this.weatherHtml = new weatherhtml();
         this.weatherApi = new weatherApi();
     }
 
     startWeatherChat() {
-        this.Html.renderWeatherPost(this.Data.weatherPostArrey)
 
-        $('.search-button').click(()  => {
+        this.weatherHtml.renderWeatherPost(this.weatherData.weatherPostArrey)
+
+        $('.search-button').click(() => {
             let cityName = this.weatherHtml.findCityInDom();
-            this.weatherApi.findTemp(cityName).then( (data) => {
+            this.weatherApi.findTemp(cityName).then((data) => {
                 this.weatherData.addWeatherPost(data);
+                console.log(data)
                 this.weatherHtml.renderWeatherPost(this.weatherData.weatherPostArrey);
-            })
-                .catch(function (jqXHR, textStatus, errorThrown) {
-                    console.log(textStatus);
-                })
-        });
+            }).catch(function (jqXHR, textStatus, errorThrown) {
+                console.log(textStatus);
 
-        $('.clear-posts').click( () => {
-            localStorage.removeItem(this.weatherData.STORAGE_ID)
+        })
+        })
+
+        $('.clear-posts').click(() => {
+           this.weatherData.removeWeatherPosts();
             this.weatherHtml.renderWeatherPost(this.weatherData.weatherPostArrey)
         })
 
-        $('.weather-posts').on('click', '.comment-button',  () => {
+        $('.weather-posts').on('click', '.comment-button', () => {
             let commentData = this.weatherHtml.getCommentFromDom(this);
             this.weatherData.addWeatherComment(commentData);
             this.weatherHtml.renderWeatherPost(this.weatherData.weatherPostArrey);

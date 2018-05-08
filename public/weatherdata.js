@@ -2,24 +2,16 @@
 class weatherPost {
     constructor() {
 
-        this.countId = 0;
         this.STORAGE_ID = 'weatherChat';
         this.weatherPostArrey = this.getFromLocalStorage();
     }
 
-    addWeatherPost(data) {
-        var currentTemp = data.current.temp_c;
-        var cityName = data.location.name;
-        var country = data.location.country
-
-        var cityInfo = {
-            name: cityName,
-            temperature: currentTemp,
-            country: country,
-            postId: this.countId,
-            comments: []
-        };
-
+    removeWeatherPosts(){
+        localStorage.removeItem(this.STORAGE_ID)
+        this.weatherPostArrey = this.getFromLocalStorage();
+    }
+    addWeatherPost(cityInfo) {
+       
         this.weatherPostArrey.push(cityInfo);
         this.saveToLocalStorage()
         this.weatherPostArrey = this.getFromLocalStorage();
