@@ -10,24 +10,26 @@ class weatherController {
         this.weatherApi = new weatherApi();
     }
 
+
     startWeatherChat() {
 
         this.weatherHtml.renderWeatherPost(this.weatherData.weatherPostArrey)
 
-        $('.search-button').click(() => {
+        $('.search-button').click(async () => {
             let cityName = this.weatherHtml.findCityInDom();
-            this.weatherApi.findTemp(cityName).then((data) => {
-                this.weatherData.addWeatherPost(data);
-                console.log(data)
-                this.weatherHtml.renderWeatherPost(this.weatherData.weatherPostArrey);
-            }).catch(function (jqXHR, textStatus, errorThrown) {
-                console.log(textStatus);
+            let data = await this.weatherApi.findTemp(cityName)
+            console.log(data)
+            this.weatherData.addWeatherPost(data);
+            console.log(data)
+            this.weatherHtml.renderWeatherPost(this.weatherData.weatherPostArrey);
+            //     }).catch(function (jqXHR, textStatus, errorThrown) {
+            //         console.log(textStatus);
 
-        })
+            // })
         })
 
         $('.clear-posts').click(() => {
-           this.weatherData.removeWeatherPosts();
+            this.weatherData.removeWeatherPosts();
             this.weatherHtml.renderWeatherPost(this.weatherData.weatherPostArrey)
         })
 
